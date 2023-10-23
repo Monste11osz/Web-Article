@@ -1,0 +1,17 @@
+{{template "base" .}}
+
+{{define "title"}}Заметка       №{{.Article.ID}}{{end}}
+
+{{define "main"}}
+<div class='articles'>
+    <div class='metadata'>
+        <strong>{{.Article.Title}}</strong>
+        <span>#{{.Article.ID}}</span>
+    </div>
+    <pre><code style="white-space: pre-wrap;">{{.Article.Content}}</code></pre>
+    <div class='metadata'>
+        <time>Создан: {{.Article.Created}}</time>
+        <time>Срок: {{.Article.Expires}}</time>
+    </div>
+</div>
+{{end}}
