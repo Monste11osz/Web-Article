@@ -1,25 +1,124 @@
-{{template "base" .}}
- 
-{{define "title"}}Главная{{end}}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Главная - Хранилище</title>
+    <link rel="stylesheet" href="/state/css/main.css">
+    <link rel="shortcut icon" href="/state/img/falcon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            font-family: "Ubuntu Mono", monospace;
+        }
 
-{{define "main"}}
-    <h2>Последние Статьи</h2>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #F1F3F6;
+            color: #34495E;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h2, .add-link {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #E4E5E7;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #FFFFFF;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F7F9FA;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #34495E;
+            text-decoration: underline;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .add-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .add-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .add-link a:hover {
+            color: #34495E;
+            text-decoration: underline;
+        }
+
+        .article-title {
+            color: #34495E;
+        }
+    </style>
+</head>
+<body>
+    <div class="add-link">
+        <a href="/">Главная</a>
+        <a href="/create/article">Добавить</a>
+    </div>
+    <h2>Хранилище</h2>
     {{if .Articles}}
-     <table>
-        <tr>
-            <th>Заголовок</th>
-            <th>Создан</th>
-            <th>ID</th>
-        </tr>
-        {{range .Articles}}
-        <tr>
-            <td><a href='/articles?id={{.ID}}'>{{.Title}}</a></td>
-            <td>{{.Created}}</td>
-            <td>#{{.ID}}</td>
-        </tr>
-        {{end}}
-    </table>
+        <table>
+            <tr>
+                <th>Заголовок</th>
+                <th>Создан</th>
+                <th>ID</th>
+            </tr>
+            {{range .Articles}}
+            <tr>
+                <td class="article-title"><a href="/articles?id={{.ID}}">{{.Title}}</a></td>
+                <td>{{.Created}}</td>
+                <td>#{{.ID}}</td>
+            </tr>
+            {{end}}
+        </table>
     {{else}}
         <p>Здесь ничего нет... пока что!</p>
     {{end}}
-{{end}}
+</body>
+</html>

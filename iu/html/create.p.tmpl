@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Создание статьи - Хранилище</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            font-family: "Ubuntu Mono", monospace;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #F1F3F6;
+            padding: 20px;
+        }
+
+        .container {
+            width: 80%; /* Ширина контейнера */
+            padding: 0 20px; /* Отступы справа и слева */
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #E4E5E7;
+            border-radius: 3px;
+        }
+
+        textarea {
+            height: 200px;
+        }
+
+        button {
+            background-color: #3498db;
+            border: none;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 3px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #34495E;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-left: -5px;
+        }
+
+        a:hover {
+            color: #34495E;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Создание статьи</h2>
+    <a href="/">Главная</a>
+    <div class="container">
+        <form method="POST" action="/create/article">
+            <label for="title">Заголовок:</label>
+            <input type="text" id="title" name="title">
+            <br>
+            <label for="content">Содержание:</label>
+            <textarea id="content" name="content"></textarea>
+            <br>
+
+            <button type="submit">Создать статью</button>
+        </form>
+    </div>
+</body>
+</html>

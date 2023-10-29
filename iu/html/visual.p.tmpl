@@ -1,17 +1,109 @@
-{{template "base" .}}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Заметка №{{.Article.ID}} - Хранилище</title>
+    <link rel="shortcut icon" href="/state/img/falcon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700">
+    <style>
+        /* Сброс стилей и базовые стили */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            font-family: "Ubuntu Mono", monospace;
+        }
 
-{{define "title"}}Заметка       №{{.Article.ID}}{{end}}
+        html, body {
+            height: 100%;
+        }
 
-{{define "main"}}
-<div class='articles'>
-    <div class='metadata'>
-        <strong>{{.Article.Title}}</strong>
-        <span>#{{.Article.ID}}</span>
-    </div>
-    <pre><code style="white-space: pre-wrap;">{{.Article.Content}}</code></pre>
-    <div class='metadata'>
-        <time>Создан: {{.Article.Created}}</time>
-        <time>Срок: {{.Article.Expires}}</time>
-    </div>
-</div>
-{{end}}
+        body {
+            line-height: 1.5;
+            background-color: #F1F3F6;
+            color: #F7F9FA;
+            overflow-y: scroll;
+            text-align: center;
+        }
+
+        /* Заголовок */
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        /* Стили для блока articles */
+        .articles {
+            background-color: #3498db;
+            border: 1px solid #E4E5E7;
+            border-radius: 3px;
+            margin: 20px;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .articles .metadata {
+            background-color: #F7F9FA;
+            color: #6A6C6F;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        .articles .metadata span {
+            float: right;
+        }
+
+        .articles .metadata strong {
+            color: #34495E;
+        }
+
+        .articles .metadata time {
+            display: inline-block;
+        }
+
+        .articles .metadata time:first-child {
+            float: left;
+        }
+
+        .articles .metadata time:last-child {
+            float: right;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            padding: 10px;
+        }
+
+        /* Стили для ссылок */
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #34495E;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/">Хранилище</a></h1>
+    </header>
+    <main>
+        <div class="articles">
+            <div class="metadata">
+                <strong>{{.Article.Title}}</strong>
+                <span>#{{.Article.ID}}</span>
+            </div>
+            <pre><code style="white-space: pre-wrap;">{{.Article.Content}}</code></pre>
+            <div class="metadata">
+                <time>Создан: {{.Article.Created}}</time>
+                <time>Срок: {{.Article.Expires}}</time>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
