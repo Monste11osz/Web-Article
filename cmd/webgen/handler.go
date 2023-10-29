@@ -25,7 +25,7 @@ func (pl *ProcessingLog) home(w http.ResponseWriter, r *http.Request) {
 
 	data := &tmData{Articles: a}
 
-	files := []string{"./iu/html/home.p.tmpl", "./iu/html/base.p.tmpl", "./iu/html/idler.p.tmpl"}
+	files := []string{"./iu/html/home.p.tmpl"}
 	tm, err := template.ParseFiles(files...)
 	if err != nil {
 		pl.serverError(w, err)
@@ -56,7 +56,7 @@ func (pl *ProcessingLog) ShowArticles(w http.ResponseWriter, r *http.Request) {
 
 	data := &tmData{Article: a}
 
-	files := []string{"./iu/html/visual.p.tmpl", "./iu/html/base.p.tmpl", "./iu/html/idler.p.tmpl"}
+	files := []string{"./iu/html/visual.p.tmpl"}
 	tm, err := template.ParseFiles(files...)
 	if err != nil {
 		pl.serverError(w, err)
@@ -71,14 +71,33 @@ func (pl *ProcessingLog) ShowArticles(w http.ResponseWriter, r *http.Request) {
 
 func (pl *ProcessingLog) CreatArticle(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		w.Header().Set("Allow", http.MethodPost)
-		pl.clientError(w, http.StatusMethodNotAllowed)
+		files := []string{"./iu/html/create.p.tmpl"}
+		tm, err := template.ParseFiles(files...)
+		if err != nil {
+			pl.serverError(w, err)
+			return
+		}
+		//tm.ExecuteTemplate(w, "create", nil)
+		err = tm.Execute(w, nil)
+		if err != nil {
+			pl.serverError(w, err)
+		}
 		return
 	}
-	title := "..."
-	content := "..."
-	expires := "7"
 
+	title := r.FormValue("title")
+	content := r.FormValue("content")
+	//expires := r.FormValue("expires")
+
+	//if r.Method != http.MethodPost {
+	//	w.Header().Set("Allow", http.MethodPost)
+	//	pl.clientError(w, http.StatusMethodNotAllowed)
+	//	return
+	//}
+	//title := "..."
+	//content := "..."
+	expires := "7"
+	//
 	id, err := pl.article.Insert(title, content, expires)
 	if err != nil {
 		pl.serverError(w, err)
